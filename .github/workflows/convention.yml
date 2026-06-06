@@ -28,13 +28,13 @@ jobs:
           fi
 
           # Validate branch format
-          if [[ ! "$BRANCH" =~ ^(feature|bugfix)/TK-([0-9]+)$ ]]; then
+          if [[ ! "$BRANCH" =~ ^(feature|bugfix)/TK_([0-9]+)$ ]]; then
             echo "❌ Invalid branch name"
-            echo "Expected: feature/TK-123 or bugfix/TK-123"
+            echo "Expected: feature/TK_123 or bugfix/TK_123"
             exit 1
           fi
 
-          TICKET="TK-${BASH_REMATCH[2]}"
+          TICKET="TK_${BASH_REMATCH[2]}"
 
           echo "Ticket extracted: $TICKET"
 
@@ -53,13 +53,13 @@ jobs:
 
             echo "Checking: $COMMIT"
 
-            if [[ ! "$COMMIT" =~ ^TK-([0-9]+):\ .+$ ]]; then
+            if [[ ! "$COMMIT" =~ ^TK_([0-9]+):\ .+$ ]]; then
               echo "❌ Invalid commit message"
-              echo "Expected format: TK-123: message"
+              echo "Expected format: $TICKET: message"
               exit 1
             fi
 
-            COMMIT_TICKET="TK-${BASH_REMATCH[1]}"
+            COMMIT_TICKET="TK_${BASH_REMATCH[1]}"
 
             if [[ "$COMMIT_TICKET" != "$TICKET" ]]; then
               echo "❌ Ticket mismatch"

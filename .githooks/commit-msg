@@ -2,7 +2,7 @@
 
 BRANCH=$(git branch --show-current)
 
-if [[ "$BRANCH" =~ ^(feature|bugfix)/(TK-[0-9]+)$ ]]; then
+if [[ "$BRANCH" =~ ^(feature|bugfix)/(TK_[0-9]+)$ ]]; then
     BRANCH_TK="${BASH_REMATCH[2]}"
 else
     echo "❌ Invalid branch name"
@@ -11,9 +11,9 @@ fi
 
 COMMIT_MSG=$(cat "$1")
 
-if [[ ! "$COMMIT_MSG" =~ ^(TK-[0-9]+):\ .+$ ]]; then
+if [[ ! "$COMMIT_MSG" =~ ^(TK_[0-9]+):\ .+$ ]]; then
     echo "❌ Commit format must be:"
-    echo "TK-123: message"
+    echo "$BRANCH_TK: message"
     exit 1
 fi
 

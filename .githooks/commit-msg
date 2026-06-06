@@ -6,6 +6,7 @@ if [[ "$BRANCH" =~ ^(feature|bugfix)/(TK_[0-9]+)$ ]]; then
     BRANCH_TK="${BASH_REMATCH[2]}"
 else
     echo "❌ Invalid branch name"
+    echo "Branch format must be: feature/TK_123 or bugfix/TK_123"
     exit 1
 fi
 
